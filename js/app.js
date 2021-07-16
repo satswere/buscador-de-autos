@@ -1,5 +1,3 @@
-console.table(autos);
-
 const Datos_auto = {
   marca: "",
   year: "",
@@ -27,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   transmision.addEventListener("change", obtenerValor);
   color.addEventListener("change", obtenerValor);
 
-  MostrarAutos();
+  MostrarAutos(autos);
   llenar_select();
 });
 
@@ -45,8 +43,9 @@ function generar_year() {
   const year_last = year_now - 10;
 }
 
-const MostrarAutos = () => {
+const MostrarAutos = (autos) => {
   const resultado = document.querySelector("#resultado");
+  resultado.innerHTML = "";
   autos.forEach((auto) => {
     const { marca, modelo, year, precio, puertas, color, transmision } = auto;
     resultado.innerHTML += `
@@ -55,35 +54,29 @@ const MostrarAutos = () => {
   });
 };
 
- function llenar_select() {
-    const max =new Date().getFullYear();
-    const min = max - 10;
-for (let i = max; i >= min; i--) {
+function llenar_select() {
+  const max = new Date().getFullYear();
+  const min = max - 10;
+  for (let i = max; i >= min; i--) {
     year.innerHTML += `
     <option value ="${i} ">  ${i}</option>
     `;
+  }
 }
-   
- }
 //filtrado de los autos
 const filtrarAuto = () => {
-  const res = autos.filter(filtrado_marca).filter(filtrado_color).filter(filtrado_puertas).filter(filtrado_transmision).filter(filtrado_precio).filter(filtrado_year);
-  console.table(res);
-  if ( res.length) {
-    const resultado  = document.querySelector("#resultado");
-    resultado.innerHTML = "";
-  res.forEach((auto) => {
-      const { marca, modelo, year, precio, puertas, color, transmision } = auto;
-      resultado.innerHTML += `
-         <p> ${marca} ${modelo} - ${year} - ${puertas} puertas - transmision: ${transmision} - color : ${color} - precio : $ ${precio} <p/>
-         `;
-    });
-  }else{
-      console.log("error");  }
- 
-
-  
- 
+  const res = autos
+    .filter(filtrado_marca)
+    .filter(filtrado_color)
+    .filter(filtrado_puertas)
+    .filter(filtrado_transmision)
+    .filter(filtrado_precio)
+    .filter(filtrado_year);
+  if (res.length) {
+    MostrarAutos(res);
+  } else {
+    resultado.innerHTML = "no existe ";
+  }
 };
 
 const filtrado_marca = (auto) => {
@@ -114,15 +107,15 @@ const filtrado_color = (auto) => {
 };
 
 const filtrado_precio = (auto) => {
- const minimo = parseInt(Datos_auto.minimo);
- const maximo  = parseInt(Datos_auto.maximo);
+  const minimo = parseInt(Datos_auto.minimo);
+  const maximo = parseInt(Datos_auto.maximo);
 
-    return auto.precio >= minimo && auto.precio <= maximo;
-  };
+  return auto.precio >= minimo && auto.precio <= maximo;
+};
 
-  const filtrado_year = (auto) => {
-    if (Datos_auto.year) {
-      return auto.year == Datos_auto.year;
-    }
-    return auto;
-  };
+const filtrado_year = (auto) => {
+  if (Datos_auto.year) {
+    return auto.year == Datos_auto.year;
+  }
+  return auto;
+};
