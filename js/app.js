@@ -46,10 +46,28 @@ function generar_year() {
 const MostrarAutos = (autos) => {
   const resultado = document.querySelector("#resultado");
   resultado.innerHTML = "";
+  resultado.innerHTML = `
+  <tr>
+  <th>nombre vehiculo</th>
+  <th>puertas</th>
+  <th>transmision</th>
+  <th>color</th>
+  <th>precio</th>
+  <th>numero de puertas</th>
+  <th>año</th>
+</tr>`;
   autos.forEach((auto) => {
     const { marca, modelo, year, precio, puertas, color, transmision } = auto;
     resultado.innerHTML += `
-       <p> ${marca} ${modelo} - ${year} - ${puertas} puertas - transmision: ${transmision} - color : ${color} - precio : $ ${precio} <p/>
+    <tr>
+    <td>${marca} ${modelo}</td>
+    <td> ${puertas}</td>
+    <td>${transmision}</td>
+    <td>${color} </td>
+    <td> ${precio} </td>
+    <td> ${puertas} </td>
+    <td> ${year} </td>
+  </tr>
        `;
   });
 };

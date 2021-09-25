@@ -35,15 +35,18 @@ form {
     font-size: 2rem;
     font-family: Arial, Helvetica, sans-serif;
 }
-#resultado p {
+
+#resultado th {
     margin: 0;
     padding: 2rem;
+    font-size: x-large;
     border-bottom: 1px solid #e1e1e1;
 }
-#resultado p span {
+#resultado td  {
     font-weight: bold;
+    font-size: large;
 }
-#resultado p:last-of-type{
+#resultado {
     border: none;
 }
 .alerta {
